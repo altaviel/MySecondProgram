@@ -3,20 +3,17 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class NavigationHelper {
-    private FirefoxDriver wd;
+public class NavigationHelper extends HelperBase {
 
     public NavigationHelper(FirefoxDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void goToGroupPage() {
-        wd.findElement(By.id("header")).click();
-        wd.findElement(By.linkText("groups")).click();
+        click (By.linkText("groups"));
     }
 
     public void returnToMainPage() {
-        wd.findElement(By.id("header")).click();
-        wd.findElement(By.linkText("home")).click();
+       click(By.linkText("home"));
     }
 }
