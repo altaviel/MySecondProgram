@@ -2,12 +2,17 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import sun.plugin2.util.BrowserType;
 
 import java.util.concurrent.TimeUnit;
+
+import static org.openqa.selenium.remote.DesiredCapabilities.*;
 
 public class ApplicationManager {
     private final String browser;
@@ -22,11 +27,11 @@ public class ApplicationManager {
     }
 
     public void init() {
-         if (browser == org.openqa.selenium.remote.BrowserType.FIREFOX){
-            wd = new FirefoxDriver();
-        }else if (browser == org.openqa.selenium.remote.BrowserType.CHROME){
+         if (browser.equals(org.openqa.selenium.remote.BrowserType.FIREFOX)){
+             wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
+        }else if (browser.equals(org.openqa.selenium.remote.BrowserType.CHROME)){
             wd = new ChromeDriver();
-        }else if (browser == org.openqa.selenium.remote.BrowserType.IE){
+        }else if (browser.equals(org.openqa.selenium.remote.BrowserType.IE)){
             wd = new InternetExplorerDriver();
         }
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
