@@ -10,7 +10,7 @@ public class ContactModificationTestsTV extends TestBase {
 
         app.getContactHelper().viewContact();
         app.getContactHelper().modifyContact();
-        app.getContactHelper().fillContactInf(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3"));
+        app.getContactHelper().fillContactInf(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3",null),false);
         app.getContactHelper().initContactModification();
         app.getNavigationHelper().returnToMainPage();
 
