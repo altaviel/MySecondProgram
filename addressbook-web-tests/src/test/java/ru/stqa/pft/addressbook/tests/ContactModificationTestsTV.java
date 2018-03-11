@@ -7,7 +7,7 @@ public class ContactModificationTestsTV extends TestBase {
 
     @Test
     public void testContactModificationTV (){
-
+        app.getNavigationHelper().returnToMainPage();
         if (! app.getContactHelper().isThereAContact()){
             app.getContactHelper().createContact(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3","test3"));
         }
