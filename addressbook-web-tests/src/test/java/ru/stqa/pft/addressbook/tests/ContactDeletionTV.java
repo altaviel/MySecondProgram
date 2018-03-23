@@ -12,23 +12,23 @@ public class ContactDeletionTV extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
 
-        app.getNavigationHelper().returnToMainPage();
-        if (! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().createContact(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3","test3"));
+        app.goTo().mainPage();
+        if (app.contact().list().size() == 0){
+            app.contact().create(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3","test3"));
         }
     }
 
     @Test
     public void contactDeletionTV() {
-        app.getNavigationHelper().returnToMainPage();
-        List<ContactData> before = app.getContactHelper().getContactList();
+        app.goTo().mainPage();
+        List<ContactData> before = app.contact().list();
         int index = before.size()-1;
-        app.getContactHelper().viewContact();
-        app.getContactHelper().modifyContact();
-        app.getContactHelper().deleteContact();
-        app.getNavigationHelper().returnToMainPage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(),index);
+        app.contact().viewContact();
+        app.contact().modifyInit();
+        app.contact().deleteContact();
+        app.goTo().mainPage();
+        List<ContactData> after = app.contact().list();
+        Assert.assertEquals(after.size(),before.size() - 1);
 
         before.remove(index);
         Assert.assertEquals(before, after);

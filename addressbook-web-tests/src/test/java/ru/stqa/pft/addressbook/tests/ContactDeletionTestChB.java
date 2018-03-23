@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class ContactDeletionTestChB extends TestBase {
@@ -13,23 +12,23 @@ public class ContactDeletionTestChB extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
 
-        app.getNavigationHelper().returnToMainPage();
-        if (! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().createContact(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3","test3"));
+        app.goTo().mainPage();
+        if (app.contact().list().size() == 0){
+            app.contact().create(new ContactData("Ivan", "Ivanovich", "Ivanov", "IvIva", "89033883323", "ivanov@gmail.com", "Mira str. 3","test3"));
         }
     }
 
     @Test
     public void testContactDeletionChB() {
-        app.getNavigationHelper().returnToMainPage();
-        List<ContactData> before = app.getContactHelper().getContactList();
+        app.goTo().mainPage();
+        List<ContactData> before = app.contact().list();
         int index = before.size()-1;
-        app.getContactHelper().checkContact();
-        app.getContactHelper().deletebyChb();
-        app.getContactHelper().closeDialog();
-        app.getNavigationHelper().returnToMainPage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(),index);
+        app.contact().checkContact();
+        app.contact().deletebyChb();
+        app.contact().closeDialog();
+        app.goTo().mainPage();
+        List<ContactData> after = app.contact().list();
+        Assert.assertEquals(after.size(),before.size() - 1);
 
         before.remove(index);
         Assert.assertEquals(before, after);
