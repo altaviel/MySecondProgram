@@ -85,6 +85,12 @@ public class ContactHelper extends HelperBase {
         createNewContact();
     }
 
+    public void modificationContact(ContactData contact) {
+        fillContactInf(contact,false);
+        initContactModification();
+        returnToMainPage();
+    }
+
     public boolean isThereAContact() {
         return isElementPresent(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
     }
@@ -104,5 +110,12 @@ public class ContactHelper extends HelperBase {
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public void returnToMainPage() {
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
+
     }
 }
