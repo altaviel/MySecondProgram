@@ -15,7 +15,7 @@ public class ContactModificationTestsTV extends TestBase {
     public void ensurePreconditions(){
 
         app.goTo().mainPage();
-        if (app.contact().list().size() == 0){
+        if (app.contact().all().size() == 0){
             app.contact().create(new ContactData()
                     .withFirstname("Ivan").withMidname("Ivanovich").withLastname("Ivanov"). withNickname("IvIva").withMobphone("89033883323").withEmail("ivanov@gmail.com").withAddress("Mira str. 3").withGroup("test3"));
         }
