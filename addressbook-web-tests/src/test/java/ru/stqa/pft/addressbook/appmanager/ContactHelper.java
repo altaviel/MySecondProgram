@@ -10,6 +10,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -77,6 +78,7 @@ public class ContactHelper extends HelperBase {
         addNewContact();
         fillContactInf(contact,true);
         createNewContact();
+        contactCache = null;
     }
 
     public void modify(ContactData contact) {
@@ -97,16 +99,21 @@ public class ContactHelper extends HelperBase {
         //return contacts;
     //}
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+                if (contactCache != null){
+                return new Contacts(contactCache);
+            }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     public void returnToMainPage() {
@@ -121,11 +128,13 @@ public class ContactHelper extends HelperBase {
         checkContactById(contact.getId());
         deletebyChb();
         closeDialog();
+        contactCache = null;
     }
 
     public void deleteByEdit(ContactData contact) {
         editById(contact.getId());
         deleteContact();
+        contactCache = null;
     }
 
     public void editById(int Id) {
@@ -138,6 +147,7 @@ public class ContactHelper extends HelperBase {
         viewContactById(contact.getId());
         modifyInit();
         deleteContact();
+        contactCache = null;
     }
 
     public void viewContactById(int Id) {
