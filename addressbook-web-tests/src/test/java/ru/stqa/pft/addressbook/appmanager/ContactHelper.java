@@ -1,21 +1,14 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -153,5 +146,9 @@ public class ContactHelper extends HelperBase {
     public void viewContactById(int Id) {
         wd.findElement(By.cssSelector("input[value='" + Id + "']"));
         click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
+    }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }
