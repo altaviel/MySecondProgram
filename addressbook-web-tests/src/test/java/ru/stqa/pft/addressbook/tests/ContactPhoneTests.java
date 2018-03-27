@@ -16,7 +16,7 @@ public class ContactPhoneTests extends TestBase {
         app.goTo().mainPage();
         if (app.contact().all().size() == 0){
             app.contact().create(new ContactData()
-                    .withFirstname("Ivan").withMidname("Ivanovich").withLastname("Ivanov"). withNickname("IvIva").getMobphone("89033883323").withEmail("ivanov@gmail.com").withAddress("Mira str. 3").withGroup("test3"));
+                    .withFirstname("Ivan").withMidname("Ivanovich").withLastname("Ivanov"). withNickname("IvIva").withMobphone("89033883323").withEmail("ivanov@gmail.com").withAddress("Mira str. 3").withGroup("test3"));
         }
     }
 
@@ -26,8 +26,11 @@ public class ContactPhoneTests extends TestBase {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-        assertThat(contact.withHomephone(), equalTo(contactInfoFromEditForm.withHomephone()));
-
+        assertThat(contact.getHomePhone(), equalTo(contactInfoFromEditForm.getHomePhone()));
+        assertThat(contact.getMobphone(), equalTo(contactInfoFromEditForm.getMobphone()));
+        assertThat(contact.getWorkPhone(), equalTo(contactInfoFromEditForm.getWorkPhone()));
+        assertThat(contact.getEmail(), equalTo(contactInfoFromEditForm.getEmail()));
+        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
 
     }
 }
