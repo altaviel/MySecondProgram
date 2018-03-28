@@ -110,7 +110,7 @@ public class ContactHelper extends HelperBase {
         List<WebElement> rows = wd.findElements(By.name("entry"));
         for (WebElement row : rows) {
            List<WebElement> cells = row.findElements((By.tagName("id")));
-           int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+           int id = Integer.parseInt(By.tagName("input").findElement(cells.get(0)).getAttribute("value"));
            String lastname = cells.get(1).getText();
            String firstname = cells.get(2).getText();
            String address = cells.get(3).getText();
@@ -161,8 +161,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void editById(int Id) {
-        wd.findElement(By.cssSelector("input[value='" + Id + "']"));
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", Id))).click();
 
     }
 
