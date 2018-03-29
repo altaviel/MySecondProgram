@@ -2,17 +2,11 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import sun.plugin2.util.BrowserType;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.openqa.selenium.remote.DesiredCapabilities.*;
 
 public class ApplicationManager {
     private final String browser;
