@@ -24,11 +24,12 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
         type(By.name("address"), contactData.getAddress());
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+        attach(By.name("photo"), contactData.getPhoto());
+ //       if (creation) {
+ //           new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+  //      } else {
+   //         Assert.assertFalse(isElementPresent(By.name("new_group")));
+     //   }
     }
 
     public ContactData infoFromEditForm(ContactData contact) {
