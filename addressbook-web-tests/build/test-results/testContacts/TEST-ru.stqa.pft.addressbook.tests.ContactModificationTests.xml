@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.pft.addressbook.tests.ContactModificationTests" tests="2" skipped="2" failures="0" errors="0" timestamp="2018-04-04T09:43:35" hostname="home" time="0.0">
+  <properties/>
+  <testcase name="testContactModification" classname="ru.stqa.pft.addressbook.tests.ContactModificationTests" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="testContactModificationTV" classname="ru.stqa.pft.addressbook.tests.ContactModificationTests" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

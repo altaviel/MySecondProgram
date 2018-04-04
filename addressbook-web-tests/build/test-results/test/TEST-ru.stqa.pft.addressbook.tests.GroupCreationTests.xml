@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.pft.addressbook.tests.GroupCreationTests" tests="11" skipped="0" failures="0" errors="0" timestamp="2018-04-03T13:07:38" hostname="home" time="15.753">
+  <properties/>
+  <testcase name="testBadGroupCreation" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.686"/>
+  <testcase name="testGroupCreation[0](GroupData{id='2147483647', name='test0'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.298"/>
+  <testcase name="testGroupCreation[1](GroupData{id='2147483647', name='test1'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.542"/>
+  <testcase name="testGroupCreation[2](GroupData{id='2147483647', name='test2'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.359"/>
+  <testcase name="testGroupCreation[3](GroupData{id='2147483647', name='test3'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.275"/>
+  <testcase name="testGroupCreation[4](GroupData{id='2147483647', name='test4'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.321"/>
+  <testcase name="testGroupCreation[5](GroupData{id='2147483647', name='test5'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.583"/>
+  <testcase name="testGroupCreation[6](GroupData{id='2147483647', name='test6'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.47"/>
+  <testcase name="testGroupCreation[7](GroupData{id='2147483647', name='test7'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.46"/>
+  <testcase name="testGroupCreation[8](GroupData{id='2147483647', name='test8'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.393"/>
+  <testcase name="testGroupCreation[9](GroupData{id='2147483647', name='test9'})" classname="ru.stqa.pft.addressbook.tests.GroupCreationTests" time="1.35"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
