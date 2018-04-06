@@ -1,40 +1,75 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.hibernate.annotations.Type;
 import org.testng.annotations.BeforeMethod;
 
+import javax.persistence.*;
 import java.io.File;
 
+@XStreamAlias("contacts")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "firstname")
     private String firstname;
+
     @Expose
+    @Column(name = "lastname")
     private String lastname;
+
     @Expose
+    @Column(name = "home")
     private String home;
+
     @Expose
+    @Column(name = "mobile")
     private String mobile;
+
     @Expose
+    @Column(name = "work")
     private String work;
+
+    @Transient
     private String allphones;
+
     @Expose
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "email2")
     private String email2;
+
+    @Column(name = "email3")
     private String email3;
+
+    @Transient
     private String allemails;
+
     @Expose
+    @Column(name = "address")
     private String address;
+
+    @Transient
     private String group;
-    private File photo;
+
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
