@@ -13,8 +13,7 @@ public class ContactDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
 
-        app.goTo().mainPage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0){
             app.contact().create(new ContactData().withFirstname("Ivan").withLastname("Ivanov")
                     .withHomePhone("111").withMobilePhone("89033883323")
                     .withWorkPhone("333").withEmail("ivanov@gmail.com").withAddress("Mira str 3").withGroup("test3"), true);
@@ -24,12 +23,12 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void contactDelete() {
         app.goTo().mainPage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.contact().deleteByEdit(deletedContact);
         app.goTo().mainPage();
         assertThat(app.contact().count(),equalTo(before.size() - 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(deletedContact)));
     }
@@ -37,12 +36,12 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletionChB() {
         app.goTo().mainPage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.contact().deleteSelected(deletedContact);
         app.goTo().mainPage();
         assertThat(app.contact().count(),equalTo(before.size() - 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(deletedContact)));
     }
@@ -50,12 +49,12 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void contactDeletionTV() {
         app.goTo().mainPage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.contact().deleteByView(deletedContact);
         app.goTo().mainPage();
         assertThat(app.contact().count(),equalTo(before.size() - 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(deletedContact)));
     }
