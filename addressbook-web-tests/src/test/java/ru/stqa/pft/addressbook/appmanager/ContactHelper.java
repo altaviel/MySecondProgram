@@ -3,10 +3,9 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -181,6 +180,33 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void add(ContactData contact) {
+            selectContactById(contact.getId());
+            submitContactAddInGroup();
+            goToHomePage();
+            contactCache = null;
+        }
 
 
+    public void remove(ContactData contact, GroupData group) {
+        viewContactById(contact.getId());
+        goToContactsInGroupsPage(group.getId());
+        selectContactById(contact.getId());
+        submitContactRemoveFromGroup();
+        goToHomePage();
+        contactCache = null;
+    }
+
+
+    public void submitContactAddInGroup() {
+        click(By.cssSelector("input[name='add']"));
+    }
+
+    public void submitContactRemoveFromGroup() {
+        click(By.cssSelector("input[name='remove']"));
+    }
+
+    public void goToContactsInGroupsPage(int group) {
+        wd.findElement(By.cssSelector(String.format("a[href='./index.php?group=%s']", group))).click();
+    }
 }
