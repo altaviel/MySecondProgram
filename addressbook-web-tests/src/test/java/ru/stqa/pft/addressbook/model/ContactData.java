@@ -7,7 +7,9 @@ import org.testng.annotations.BeforeMethod;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contacts")
 @Entity
@@ -41,6 +43,14 @@ public class ContactData {
     @Type(type = "text")
     private String work;
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    public void setGroups(Set<GroupData> groups) {
+        this.groups = groups;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,16 +63,15 @@ public class ContactData {
                 Objects.equals(mobile, that.mobile) &&
                 Objects.equals(work, that.work) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(email2, that.email2) &&
-                Objects.equals(email3, that.email3) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(group, that.group);
+             //   Objects.equals(email2, that.email2) &&
+             //   Objects.equals(email3, that.email3) &&
+                Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, firstname, lastname, home, mobile, work, allphones, email, email2, email3, allemails, address, group);
+        return Objects.hash(id, firstname, lastname, home, mobile, work, email, email2, email3, address);
     }
 
     @Transient
@@ -90,12 +99,15 @@ public class ContactData {
     @Type(type = "text")
     private String address;
 
-    @Transient
-    private String group;
 
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public File getPhoto() {
         return new File(photo);
@@ -140,11 +152,6 @@ public class ContactData {
 
     public ContactData withAllPhones(String allphones) {
         this.allphones = allphones;
-        return this;
-    }
-
-    public ContactData withGroup(String group) {
-        this.group = group;
         return this;
     }
 
@@ -204,10 +211,6 @@ public class ContactData {
         return work;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
     public String getAllPhones() {
         return allphones;
     }
@@ -228,6 +231,11 @@ public class ContactData {
 
     public String getAddress() {
         return address;
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 
 }

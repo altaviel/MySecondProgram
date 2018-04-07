@@ -2,11 +2,13 @@ package ru.stqa.pft.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -51,6 +53,22 @@ public class ContactCreationTest extends TestBase {
             return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
         }
     }
+    @BeforeMethod
+    public void ensurePreconditions() {
+        Groups groups = app.db().groups();
+        GroupData groupData;
+
+        if (groups.isEmpty()) {
+            app.goTo().groupPage();
+            groupData = new GroupData()
+                    .withName("test")
+                    .withHeader("header")
+                    .withFooter("footer");
+            app.group().create(groupData);
+        } else {
+            groupData = groups.iterator().next();
+        }
+    }
 
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
@@ -62,5 +80,7 @@ public class ContactCreationTest extends TestBase {
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+        verifyContactListInUi();
     }
+
 }
