@@ -27,7 +27,7 @@ public class RegistrationTests extends TestBase {
         String email = String.format("user%s@localhost", now);
 
         app.registration().start(user, email);
-        List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000); //для  встроенного почтового сервера
+        List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000); 
         String confirmationLink = findConfirmationLink(mailMessages, email);
 
         app.registration().finish(confirmationLink, password);
