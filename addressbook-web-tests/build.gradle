@@ -47,7 +47,3 @@ task testContacts(type : Test){
         systemProperty 'verufyUI', "${verufyUI}"
     }
 }
-
-test{
-useTestNG()
-}
